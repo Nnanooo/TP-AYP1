@@ -50,6 +50,43 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
     }
 
     /**
+     * pre: la nave debe tener {@link NaveAliada#combustible} disponible para operar
+     * el sistema de recolección <br>
+     * post: el {@link NaveAliada#combustible} se incrementará en la mayor cantidad
+     * que pueda extraer <br>
+     * post: consumirá {@link #obtenerConsumoPorMovimiento()} al realizar la
+     * extracción
+     * 
+     * @param direccion es la dirección desde la cual intentará recolectar
+     * @param cantidad  es la cantidad a recolectar. Se limitará automáticamente
+     *                  según el orígen de recolección y la capacidad total de carga
+     */
+    public void recolectarDesde(Direccion direccion) {
+        if (this.combustible <= 0) {
+            return;
+        }
+
+        setDireccion(direccion);
+        actualizarImagen();
+        Greenfoot.delay(20);
+        consumirCombustible(obtenerConsumoPorMovimiento());
+
+        Actor actor = getOneObjectAtOffset(this.direccion.dx, this.direccion.dy, Actor.class);
+        if (!(actor instanceof MineralDeOro)) {
+            return;
+        }
+
+        MineralDeOro objetivo = (MineralDeOro) actor;
+        if (objetivo != null) {
+            objetivo.entregarMineralORO();
+            int tamCelda = getWorld().getCellSize();
+            imagenBase = new GreenfootImage("NaveRecolectoraOROfase2ON.png");
+            imagenBase.scale((int) (tamCelda * ESCALA_X), (int) (tamCelda * ESCALA_Y));
+            actualizarImagen();
+        }
+    }
+
+    /**
      * pre: los motores se encuentran encendidos
      * {@link NaveDeAtaque#motoresEncendidos} <br/>
      * post: apagará sus motores
@@ -64,7 +101,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
             actualizarImagen();
         }
     }
-
+    
     /**
      * {@inheritDoc}
      */
@@ -91,7 +128,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      * 
      * @param direccion
      */
-    public void atacarHacia(Direccion direccion) {
+    public void ataqueHabilidad(Direccion direccion) {
         if (!puedeActuar()) {
             return;
         }
@@ -244,7 +281,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         canvas.setColor(obtenerColorDeBarraIndicadora());
 
         canvas.fillRect(6, imagenBase.getHeight(),
-                (int) ((getWorld().getCellSize() - 10) * obtenerProporcionDeBarraIndicadora()), 8);
+            (int) ((getWorld().getCellSize() - 10) * obtenerProporcionDeBarraIndicadora()), 8);
 
         canvas.rotate(360 - direccion.rotacion);
 
@@ -256,4 +293,4 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
     }
 }
-    
+

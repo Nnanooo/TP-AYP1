@@ -72,6 +72,10 @@ public abstract class NaveAliada extends NaveBase {
         actualizarImagen();
     }
 
+    protected void consumirORO(int cantidadORO){
+    
+    }
+    
     /**
      * post: carga la cantidad de {@link #combustible} solicitado, o llega a
      * {@link #obtenerCombustibleMaximo()} si éste se excediera del que puede llevar
