@@ -13,7 +13,8 @@ public class Mundo00 extends MundoBase {
 
         //agregar(new NaveExploradoraEnemiga(Direccion.NORTE), 4, 0);
         //agregar(new NaveDeAtaqueEnemiga(Direccion.NORTE), 5, 1);
-
+        agregar(new AntenaEnemiga(),0,2);
+        
         agregar(new PilotoORO(), 0,8); 
     }
 
@@ -22,13 +23,17 @@ public class Mundo00 extends MundoBase {
      */
     protected void generarPOIs() {
         marcarCelda(1, 8, new Color(0, 0, 200, 150));
-        marcarCelda(10, 8, new Color(0 ,255 , 0, 150));
+        //marcarCelda(10, 8, new Color(0 ,255 , 0, 150));
     }
 
     protected void generarItems() {
         agregar(new Item(), 0, 0);
     }
 
+    protected void generarCisterna(){
+        agregar(new CisternaVacia(),10,8);
+    }
+    
     protected void generarAsteroides() {
         agregar(new Asteroide(), 3, 1);
         agregar(new Asteroide(), 3, 2);

@@ -12,6 +12,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      */
     protected boolean motoresEncendidos = false;
     protected PilotoBase piloto;
+    private boolean OroEquipado = false;
 
     /**
      * Inicializa una nueva NaveDeAtaque con los motores apagados
@@ -77,12 +78,13 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
 
         MineralDeOro objetivo = (MineralDeOro) actor;
-        if (objetivo != null) {
+        if (objetivo != null && OroEquipado == false) {
             objetivo.entregarMineralORO();
             int tamCelda = getWorld().getCellSize();
             imagenBase = new GreenfootImage("NaveRecolectoraOROfase2ON.png");
             imagenBase.scale((int) (tamCelda * ESCALA_X), (int) (tamCelda * ESCALA_Y));
             actualizarImagen();
+            OroEquipado = true;
         }
     }
 
@@ -129,7 +131,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      * @param direccion
      */
     public void ataqueHabilidad(Direccion direccion) {
-        if (!puedeActuar()) {
+        if (!puedeActuar() && OroEquipado == false) {
             return;
         }
         this.direccion = direccion;
@@ -144,7 +146,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
         Dañable objetivo = (Dañable) actor;
         if (objetivo != null) {
-            Greenfoot.playSound("laser-shot.wav");
+            Greenfoot.playSound("NaveOroHab.wav");
             objetivo.recibirDañoDe(this);
         }
     }
