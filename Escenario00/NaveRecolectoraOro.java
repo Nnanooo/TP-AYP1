@@ -39,7 +39,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      * post: encenderá sus motores
      */
     public void encenderMotores() {
-        if (this.combustible > 0 && !this.motoresEncendidos) {
+        if (this.combustible > 0 && !this.motoresEncendidos && this.piloto != null) {
             this.motoresEncendidos = true;
             Greenfoot.playSound("engine-on.wav");
             int tamCelda = getWorld().getCellSize();
@@ -101,7 +101,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
             actualizarImagen();
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -262,8 +262,10 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
     }
 
     public void bajarPiloto() {
-        this.piloto = null;
-        actualizarImagen();
+        if(!this.motoresEncendidos){
+            this.piloto = null;
+            actualizarImagen();
+        }
     }
 
     @Override

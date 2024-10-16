@@ -1,13 +1,47 @@
-public class PilotoDeEjemplo extends PilotoBase {
+public class PilotoDeEjemplo extends PilotoBase implements PilotoAtacante{    
+    
+    private NaveDeAtaque navePilotada;
+    
     @Override
     public void subirse(NaveDeAtaque nave) {
-        super.subirse(nave);
+        if (navePilotada != null) {
+            bajarse();
+        }
+        navePilotada = nave;        
+        navePilotada.recibirPiloto(this);
+        actualizarImagen();
     }
     
     @Override
     public void bajarse() {
-        super.bajarse();
+        navePilotada.bajarPiloto();
+        navePilotada = null;
+        actualizarImagen();
     }
+    
+    @Override
+    public void actualizarImagen() {
+        int tamCelda = getWorld().getCellSize();
+
+        MyGreenfootImage nuevaImagen;
+        if (navePilotada != null) {
+            nuevaImagen = new MyGreenfootImage(getImage()) {
+                public void configurar() {
+                    setTransparency(150);
+                }
+            };
+        } else {
+            nuevaImagen = new MyGreenfootImage(imagenOriginal) {
+                public void configurar() {
+                    highlight(getAura());
+                }
+            };
+        }
+        nuevaImagen.scale((int) (tamCelda * ESCALA_X), (int) (tamCelda * ESCALA_Y));
+        setImage(nuevaImagen);
+    }
+    
+    
 
     void despegar() {
         navePilotada.encenderMotores();
