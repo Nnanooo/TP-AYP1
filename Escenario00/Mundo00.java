@@ -7,13 +7,20 @@ public class Mundo00 extends MundoBase {
     }
 
     protected void generarNaves() {
-        agregar(new NaveRecolectoraOro(), 1, 8);
+        NaveRecolectoraOro naveOro = new NaveRecolectoraOro(1, 8);
+        
+        
+        agregar(naveOro, naveOro.columna, naveOro.fila);
         //agregar(new NaveDeAtaque(), 2, 1);
         //agregar(new NaveRecolectora(), 3, 2);
 
         //agregar(new NaveExploradoraEnemiga(Direccion.NORTE), 4, 0);
         //agregar(new NaveDeAtaqueEnemiga(Direccion.NORTE), 5, 1);
-        agregar(new AntenaEnemiga(),0,2);
+        
+        AntenaEnemiga antenaEnemiga = new AntenaEnemiga(0, 2);
+        
+        agregar(antenaEnemiga, antenaEnemiga.columna, antenaEnemiga.fila);
+        naveOro.agregarAntenaEnemiga(antenaEnemiga);
         
         agregar(new PilotoORO(), 0,8); 
     }

@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Write a description of class NaveRecolectoraOro here.
@@ -13,13 +15,44 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
     protected boolean motoresEncendidos = false;
     protected PilotoBase piloto;
     private boolean OroEquipado = false;
+    private List<AntenaEnemiga> antenasEnemigas = new ArrayList<>();
+    private boolean estado = false;
+    public int columna;
+    public int fila;
 
+    
     /**
      * Inicializa una nueva NaveDeAtaque con los motores apagados
      */
-    public NaveRecolectoraOro() {
+    public NaveRecolectoraOro(int columna, int fila) {
         super();
+        this.columna = columna;
+        this.fila = fila;
     }
+    
+    public void agregarAntenaEnemiga(AntenaEnemiga ant) {
+        antenasEnemigas.add(ant);
+    }
+
+    /*public void eliminarAntenaEnemiga(AntenaEnemiga ant) {
+        antenasEnemigas.remove(ant);
+    }*/
+
+    public void notificarAntenasEnemigas() {
+        for (AntenaEnemiga ant : antenasEnemigas) {
+            ant.actualizar(estado);
+        }
+    }
+
+    public void cambiarEstado(boolean nuevoEstado) {
+        this.estado = nuevoEstado;
+        notificarAntenasEnemigas();
+    }
+
+
+    
+    
+    
 
     /**
      * Inicializa una nueva NaveDeAtaque con los motores apagados. Este constructor
@@ -131,7 +164,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      * @param direccion
      */
     public void ataqueHabilidad(Direccion direccion) {
-        if (!puedeActuar() && OroEquipado == false) {
+        if (OroEquipado == false) {
             return;
         }
         this.direccion = direccion;
