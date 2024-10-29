@@ -131,7 +131,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      * @param direccion
      */
     public void ataqueHabilidad(Direccion direccion) {
-        if (!puedeActuar() && OroEquipado == false) {
+        if (puedeActuar() && OroEquipado == false) {
             return;
         }
         this.direccion = direccion;
@@ -151,6 +151,51 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
     }
 
+    public void ataqueHabilidadXX() {
+        if (OroEquipado == false) {
+            return;
+        }
+        this.direccion = direccion;
+        actualizarImagen();
+        setRotation(direccion.rotacion);
+        Greenfoot.delay(20);
+        consumirCombustible(obtenerConsumoPorAtaque()*2);
+
+        Actor[] actor = new Actor[8];
+        actor[0]=getOneObjectAtOffset(0, -1, Actor.class);
+        actor[1]=getOneObjectAtOffset(0, 1, Actor.class);
+        actor[2]=getOneObjectAtOffset(-1, -1, Actor.class);
+        actor[3]=getOneObjectAtOffset(-1, 0, Actor.class);
+        actor[4]=getOneObjectAtOffset(-1, 1, Actor.class);
+        actor[5]=getOneObjectAtOffset(1, -1, Actor.class);
+        actor[6]=getOneObjectAtOffset(1, 0, Actor.class);
+        actor[7]=getOneObjectAtOffset(1, 1, Actor.class);
+
+        Dañable[] objetivos = new Dañable[8];
+
+        for(int i=0; i<actor.length; i++){
+            objetivos[i] = (Dañable) actor[i];
+        }
+
+        int contador=0;
+        for(Dañable objetivo:objetivos){
+            if (objetivo != null){
+                contador ++;
+            }
+        }
+
+        if (contador != 0) {
+            Greenfoot.playSound("NaveOroHab.wav");
+            Greenfoot.setSpeed(100);
+            for(int i=0; i<objetivos.length; i++){
+                if (objetivos[i] != null){
+                    objetivos[i].recibirDañoDe(this);
+                }
+            }
+            Greenfoot.setSpeed(50);
+        }
+    }
+    
     /**
      * @see NaveAliada#moverHacia(Direccion)
      */
