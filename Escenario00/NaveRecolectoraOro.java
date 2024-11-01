@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.World;
+import java.util.ArrayList;
 
 /**
  * Write a description of class NaveRecolectoraOro here.
@@ -14,6 +16,19 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
     protected PilotoBase piloto;
     private boolean OroEquipado = false;
 
+    private ArrayList<Observer> observers = new ArrayList<>();
+    //private AgujeroNegro[] observers = getWorld().getObjects(AgujeroNegro.class);
+
+    private void notificarObservers() {
+        for (Observer observer : observers) {
+            observer.accion();
+        }
+    }
+
+    public void agregarObserver(Observer observer) {
+        observers.add(observer);
+    }
+    
     /**
      * Inicializa una nueva NaveDeAtaque con los motores apagados
      */
@@ -49,6 +64,28 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
             actualizarImagen();
         }
     }
+
+    /*
+     * 
+
+    public class Nave extends Actor {
+
+    public void agregarObserver(Observer observer) {
+    observers.add(observer);
+    }
+
+    public void mover(int dx, int dy) {
+    setLocation(getX() + dx, getY() + dy);
+    notificarObservers(); // Notifica a los observadores sobre el movimiento
+    }
+
+    private void notificarObservers() {
+    for (Observer observer : observers) {
+    observer.update(getX(), getY());
+    }
+    }
+    }
+     */
 
     /**
      * pre: la nave debe tener {@link NaveAliada#combustible} disponible para operar
@@ -174,7 +211,11 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         Dañable[] objetivos = new Dañable[8];
 
         for(int i=0; i<actor.length; i++){
+            if(!(actor[i] instanceof Dañable)){
+                actor[i] = null;
+            }
             objetivos[i] = (Dañable) actor[i];
+
         }
 
         int contador=0;
@@ -193,14 +234,20 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
                 }
             }
             Greenfoot.setSpeed(50);
+            OroEquipado = false;
+            int tamCelda = getWorld().getCellSize();
+            imagenBase = new GreenfootImage("NaveRecolectoraOROfase1ON.png");
+            imagenBase.scale((int) (tamCelda * ESCALA_X), (int) (tamCelda * ESCALA_Y));
+            actualizarImagen();      
         }
     }
-    
+
     /**
      * @see NaveAliada#moverHacia(Direccion)
      */
     public void avanzarHacia(Direccion direccion) {
         super.moverHacia(direccion);
+        notificarObservers();
     }
 
     /**
@@ -224,7 +271,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      */
     @Override
     public int obtenerDaño() {
-        return 35;
+        return 200;
     }
 
     /**

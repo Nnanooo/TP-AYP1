@@ -38,9 +38,11 @@ public abstract class MundoBase extends World {
         generarItems();
 
         generarCisterna();
-        
+        generarAgujeroNegro();
+
         generarNaves();
         agregar(new Brujula(), ancho, alto);
+        agregarObservadores();
     }
 
     /**
@@ -84,6 +86,12 @@ public abstract class MundoBase extends World {
     }
 
     /**
+     * Punto de extensión para generar los Observadores
+     */
+    protected void agregarObservadores(){
+    }
+
+    /**
      * Punto de extensión para generar los Items
      */
     protected void generarItems() {
@@ -94,7 +102,13 @@ public abstract class MundoBase extends World {
      */
     protected void generarCisterna(){       
     }
-    
+
+    /**
+     * Punto de extension para generar los Agujeros Negros
+     */
+    protected void generarAgujeroNegro(){       
+    }
+
     /**
      * Punto de extensión para generar las Naves
      */
