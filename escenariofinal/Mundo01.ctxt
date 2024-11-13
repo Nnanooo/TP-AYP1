@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Mundo01
+comment1.params=
+comment1.target=Mundo01()
+comment2.params=
+comment2.target=void\ generarNaves()
+comment3.params=
+comment3.target=void\ generarPOIs()
+comment3.text=\r\n\ Color\ creado\ con\ RGB,\ ultimo\ valor\ da\ la\ opacidad\ \ \ \r\n
+comment4.params=
+comment4.target=void\ generarItems()
+comment5.params=
+comment5.target=void\ generarCisterna()
+comment6.params=
+comment6.target=void\ generarAgujerosNegros()
+comment7.params=
+comment7.target=void\ generarAntenasEnemigas()
+comment8.params=
+comment8.target=void\ agregarObservadores()
+comment9.params=
+comment9.target=void\ generarAsteroides()
+numComments=10

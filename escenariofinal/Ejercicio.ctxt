@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Ejercicio
+comment1.params=piloto\ nave
+comment1.target=void\ primerPaso(PilotoORO,\ NaveRecolectoraOro)
+comment2.params=piloto\ nave
+comment2.target=void\ segundoPaso(PilotoORO,\ NaveRecolectoraOro)
+comment3.params=piloto\ nave
+comment3.target=void\ tercerPaso(PilotoORO,\ NaveRecolectoraOro)
+comment4.params=piloto\ nave
+comment4.target=void\ cuartoPaso(PilotoORO,\ NaveRecolectoraOro)
+comment5.params=piloto\ nave
+comment5.target=void\ quintoPaso(PilotoORO,\ NaveRecolectoraOro)
+comment6.params=piloto\ nave
+comment6.target=void\ sextoPaso(PilotoORO,\ NaveRecolectoraOro)
+numComments=7
