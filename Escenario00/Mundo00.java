@@ -77,9 +77,14 @@ public class Mundo00 extends MundoBase {
         agregar(new Asteroide(), 2, 2);
         agregar(new Asteroide(), 5, 3);
         agregar(new Asteroide(), 6, 3);
+        agregar(new Asteroide(), 4, 4);
+        agregar(new Asteroide(), 6, 4);
+        agregar(new Asteroide(), 4, 5);
+        agregar(new Asteroide(), 6, 5);
 
         agregar(new MineralDeOro(), 2, 1);
         agregar(new MineralDeOro(), 5, 2);
         agregar(new MineralDeOro(), 11, 3);
+        agregar(new MineralDeOro(), 1, 6);
     }
 }

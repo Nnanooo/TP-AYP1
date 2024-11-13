@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Ejercicio
+comment1.params=piloto\ nave
+comment1.target=void\ llegarAgujeroNegro(PilotoORO,\ NaveRecolectoraOro)
+comment2.params=piloto\ nave
+comment2.target=void\ RecolectarOroYPerderloPorAntena(PilotoORO,\ NaveRecolectoraOro)
+comment3.params=piloto\ nave
+comment3.target=void\ RecolectarOroYAtacar(PilotoORO,\ NaveRecolectoraOro)
+numComments=4
