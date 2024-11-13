@@ -38,9 +38,11 @@ public abstract class MundoBase extends World {
         generarItems();
 
         generarCisterna();
-        generarAgujeroNegro();
+        generarAgujerosNegros();
 
         generarNaves();
+        
+        generarAntenasEnemigas();
         agregar(new Brujula(), ancho, alto);
         agregarObservadores();
     }
@@ -49,6 +51,13 @@ public abstract class MundoBase extends World {
      * Punto de extensión para generar los Puntos de Interés (POI)
      */
     protected void generarPOIs() {
+    }
+    
+    /**
+     * Punto de extensión para generar las Antenas Enemigas
+     */
+    protected void generarAntenasEnemigas(){
+        agregar(new AntenaEnemiga(),0,2);
     }
 
     /**
@@ -106,7 +115,7 @@ public abstract class MundoBase extends World {
     /**
      * Punto de extension para generar los Agujeros Negros
      */
-    protected void generarAgujeroNegro(){       
+    protected void generarAgujerosNegros(){       
     }
 
     /**

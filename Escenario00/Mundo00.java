@@ -4,7 +4,7 @@ import java.util.List;
 public class Mundo00 extends MundoBase {
 
     public Mundo00() {
-        super(12, 10, 80);
+        super(12, 10, 70);
     }
 
     protected void generarNaves() {
@@ -15,7 +15,6 @@ public class Mundo00 extends MundoBase {
 
         //agregar(new NaveExploradoraEnemiga(Direccion.NORTE), 4, 0);
         //agregar(new NaveDeAtaqueEnemiga(Direccion.NORTE), 5, 1);
-        agregar(new AntenaEnemiga(),0,2);
 
         agregar(new PilotoORO(), 0,8);
     }
@@ -36,25 +35,35 @@ public class Mundo00 extends MundoBase {
         agregar(new Cisterna(),9,8);
     }
 
-    protected void generarAgujeroNegro(){
+    protected void generarAgujerosNegros(){
         agregar(new AgujeroNegro(),8,6);
         agregar(new AgujeroNegro(),8,3);
         agregar(new AgujeroNegro(),3,3);
         //agregarObservadoresAGuerras();
     }
-
+    
+    protected void generarAntenasEnemigas(){
+        agregar(new AntenaEnemiga(),0,2);
+    }
+    
     protected void agregarObservadores() {
         // Obtener todas las naves recolectoras de oro en el mundo
         List<NaveRecolectoraOro> naves = getObjects(NaveRecolectoraOro.class);
 
         // Obtener todos los agujeros negros en el mundo
         List<AgujeroNegro> agujerosNegros = getObjects(AgujeroNegro.class);
+        
+        // Obtener todas las antenas enemigas en el mundo
+        List<AntenaEnemiga> antenasEnemigas = getObjects(AntenaEnemiga.class);
 
         // Iterar sobre cada nave recolectora de oro
         for (NaveRecolectoraOro nave : naves) {
             // Iterar sobre cada agujero negro y agregarlo como observer a la nave
             for (AgujeroNegro agujeroNegro : agujerosNegros) {
                 nave.agregarObserver(agujeroNegro);
+            }
+            for (AntenaEnemiga antenaEnemiga : antenasEnemigas) {
+                nave.agregarObserver(antenaEnemiga);
             }
         }
     }

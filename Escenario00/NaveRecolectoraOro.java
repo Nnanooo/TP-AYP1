@@ -53,6 +53,10 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         return OroEquipado;
     }
     
+    public void perderOro(){
+        this.OroEquipado = false;
+    }
+    
     /**
      * pre: posee combustible {@link NaveAliada#combustible} y los motores se
      * encuentran apagados {@link NaveDeAtaque#motoresEncendidos} <br/>
@@ -225,6 +229,12 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
      * @see NaveAliada#moverHacia(Direccion)
      */
     public void avanzarHacia(Direccion direccion) {
+        super.moverHacia(direccion);
+        notificarObservers();
+    }
+    
+    public void propulsionHacia(Direccion direccion) {
+        super.moverHacia(direccion);
         super.moverHacia(direccion);
         notificarObservers();
     }
