@@ -57,6 +57,7 @@ public class AgujeroNegro extends ActorBase implements Observer
             if (objetivos[i] != null){
                 objetivos[i].setLocation(this.getX(),this.getY());
                 objetivos[i].consumirCombustible(50);
+                Greenfoot.playSound("agujeroNegro.wav");
             }
         }
 

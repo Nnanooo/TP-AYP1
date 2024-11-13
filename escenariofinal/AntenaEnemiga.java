@@ -50,6 +50,7 @@ public class AntenaEnemiga extends NaveEnemiga implements Observer
                 objetivos[i].imagenBase.scale((int) (tamCelda * ESCALA_X), (int) (tamCelda * ESCALA_Y));
                 objetivos[i].actualizarImagen();
                 objetivos[i].perderOro();
+                Greenfoot.playSound("antena.wav");
             }
         }
 

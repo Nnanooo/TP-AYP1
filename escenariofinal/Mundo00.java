@@ -4,7 +4,7 @@ import java.util.List;
 public class Mundo00 extends MundoBase {
 
     public Mundo00() {
-        super(12, 10, 70);
+        super(5, 5, 70);
     }
 
     protected void generarNaves() {
@@ -28,22 +28,20 @@ public class Mundo00 extends MundoBase {
     }
 
     protected void generarItems() {
-        agregar(new Item(), 0, 0);
+        agregar(new Item(), 0, 3);
     }
 
     protected void generarCisterna(){
-        agregar(new Cisterna(),9,8);
+        agregar(new Cisterna(),3,4);
     }
 
     protected void generarAgujerosNegros(){
-        agregar(new AgujeroNegro(),8,6);
-        agregar(new AgujeroNegro(),8,3);
-        agregar(new AgujeroNegro(),3,3);
+        agregar(new AgujeroNegro(),3,1);
         //agregarObservadoresAGuerras();
     }
     
     protected void generarAntenasEnemigas(){
-        agregar(new AntenaEnemiga(),0,2);
+        agregar(new AntenaEnemiga(),1,1);
     }
     
     protected void agregarObservadores() {
@@ -69,22 +67,9 @@ public class Mundo00 extends MundoBase {
     }
 
     protected void generarAsteroides() {
-        agregar(new Asteroide(), 3, 1);
-        agregar(new Asteroide(), 3, 2);
-        agregar(new Asteroide(), 3, 0);
-        agregar(new Asteroide(), 4, 2);
         agregar(new Asteroide(), 4, 3);
-        agregar(new Asteroide(), 2, 2);
-        agregar(new Asteroide(), 5, 3);
-        agregar(new Asteroide(), 6, 3);
-        agregar(new Asteroide(), 4, 4);
-        agregar(new Asteroide(), 6, 4);
-        agregar(new Asteroide(), 4, 5);
-        agregar(new Asteroide(), 6, 5);
 
-        agregar(new MineralDeOro(), 2, 1);
-        agregar(new MineralDeOro(), 5, 2);
-        agregar(new MineralDeOro(), 11, 3);
-        agregar(new MineralDeOro(), 1, 6);
+        agregar(new MineralDeOro(), 1, 3);
+        agregar(new MineralDeOro(), 2, 4);
     }
 }
