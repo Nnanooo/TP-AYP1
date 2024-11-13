@@ -33,7 +33,7 @@ public class Mundo00 extends MundoBase {
     }
 
     protected void generarCisterna(){
-        agregar(new CisternaVacia(),9,8);
+        agregar(new Cisterna(),9,8);
     }
 
     protected void generarAgujeroNegro(){

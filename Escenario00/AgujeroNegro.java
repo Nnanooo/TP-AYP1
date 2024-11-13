@@ -24,6 +24,8 @@ public class AgujeroNegro extends ActorBase implements Observer
 
     @Override
     public void accion() {
+
+
         Actor[] actor = new Actor[8];
         actor[0]=getOneObjectAtOffset(0, -1, Actor.class);
         actor[1]=getOneObjectAtOffset(0, 1, Actor.class);
@@ -56,8 +58,9 @@ public class AgujeroNegro extends ActorBase implements Observer
         for(int i=0; i<objetivos.length; i++){
             if (objetivos[i] != null){
                 objetivos[i].setLocation(this.getX(),this.getY());
+                objetivos[i].consumirCombustible(50);
             }
         }
-    }
 
+    }
 }

@@ -49,6 +49,10 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         this.combustible = carga;
     }
 
+    public boolean tengoOro(){
+        return OroEquipado;
+    }
+    
     /**
      * pre: posee combustible {@link NaveAliada#combustible} y los motores se
      * encuentran apagados {@link NaveDeAtaque#motoresEncendidos} <br/>
@@ -64,28 +68,6 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
             actualizarImagen();
         }
     }
-
-    /*
-     * 
-
-    public class Nave extends Actor {
-
-    public void agregarObserver(Observer observer) {
-    observers.add(observer);
-    }
-
-    public void mover(int dx, int dy) {
-    setLocation(getX() + dx, getY() + dy);
-    notificarObservers(); // Notifica a los observadores sobre el movimiento
-    }
-
-    private void notificarObservers() {
-    for (Observer observer : observers) {
-    observer.update(getX(), getY());
-    }
-    }
-    }
-     */
 
     /**
      * pre: la nave debe tener {@link NaveAliada#combustible} disponible para operar
@@ -115,7 +97,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
 
         MineralDeOro objetivo = (MineralDeOro) actor;
-        if (objetivo != null && OroEquipado == false) {
+        if (objetivo != null && !OroEquipado) {
             objetivo.entregarMineralORO();
             int tamCelda = getWorld().getCellSize();
             imagenBase = new GreenfootImage("NaveRecolectoraOROfase2ON.png");
@@ -125,6 +107,32 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
     }
 
+    public void descargarHacia(Direccion direccion) {
+        if (this.combustible <= 0) {
+            return;
+        }
+
+        setDireccion(direccion);
+        actualizarImagen();
+        Greenfoot.delay(20);
+        consumirCombustible(10);
+
+        Actor actor = getOneObjectAtOffset(this.direccion.dx, this.direccion.dy, Actor.class);
+        if (!(actor instanceof Cisterna)) {
+            return;
+        }
+
+        Cisterna objetivo = (Cisterna) actor;
+        if (objetivo != null && OroEquipado) {
+            objetivo.recibirOroDesde(this);
+            int tamCelda = getWorld().getCellSize();
+            imagenBase = new GreenfootImage("NaveRecolectoraOROfase1ON.png");
+            imagenBase.scale((int) (tamCelda * ESCALA_X), (int) (tamCelda * ESCALA_Y));
+            actualizarImagen();
+            OroEquipado = false;
+        }
+    }
+    
     /**
      * pre: los motores se encuentran encendidos
      * {@link NaveDeAtaque#motoresEncendidos} <br/>
@@ -159,36 +167,7 @@ public class NaveRecolectoraOro extends NaveAliada implements Atacante {
         }
     }
 
-    /**
-     * pre: La NaveDeAtaque {@link #puedeActuar()} <br>
-     * post: El {@link NaveAliada#combustible} se reducirá en
-     * {@link #obtenerConsumoPorAtaque()}. Si en la dirección deseada hay un
-     * {@link Dañable}, éste recibirá {@link #obtenerDaño()}.
-     * 
-     * @param direccion
-     */
-    public void ataqueHabilidad(Direccion direccion) {
-        if (puedeActuar() && OroEquipado == false) {
-            return;
-        }
-        this.direccion = direccion;
-        actualizarImagen();
-        setRotation(direccion.rotacion);
-        Greenfoot.delay(20);
-        consumirCombustible(obtenerConsumoPorAtaque());
-
-        Actor actor = getOneObjectAtOffset(this.direccion.dx, this.direccion.dy, Actor.class);
-        if (!(actor instanceof Dañable)) {
-            return;
-        }
-        Dañable objetivo = (Dañable) actor;
-        if (objetivo != null) {
-            Greenfoot.playSound("NaveOroHab.wav");
-            objetivo.recibirDañoDe(this);
-        }
-    }
-
-    public void ataqueHabilidadXX() {
+    public void ataqueEspecial() {
         if (OroEquipado == false) {
             return;
         }
